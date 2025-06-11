@@ -1,16 +1,38 @@
+enum UserType { client, owner }
+
 class User {
   String? id;
   String? name;
   String? email;
   String? password;
+  String? phone;
+  UserType? userType;
+  DateTime? createdAt;
 
-  User({this.id, this.name, this.email, this.password});
+  User({
+    this.id,
+    this.name,
+    this.email,
+    this.password,
+    this.phone,
+    this.userType,
+    this.createdAt,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     email = json['email'];
     password = json['password'];
+    phone = json['phone'];
+    if (json['userType'] != null) {
+      userType = UserType.values.firstWhere(
+        (e) => e.toString().split('.').last == json['userType'],
+        orElse: () => UserType.client,
+      );
+    }
+    createdAt =
+        json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -19,6 +41,13 @@ class User {
     data['name'] = name;
     data['email'] = email;
     data['password'] = password;
+    data['phone'] = phone;
+    if (userType != null) {
+      data['userType'] = userType.toString().split('.').last;
+    }
+    if (createdAt != null) {
+      data['createdAt'] = createdAt!.toIso8601String();
+    }
     return data;
   }
 }

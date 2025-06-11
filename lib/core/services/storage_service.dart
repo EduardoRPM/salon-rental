@@ -15,7 +15,7 @@ class StorageService {
         'email': user.email,
         'phone': user.phone,
         'userType': user.userType == UserType.client ? 'client' : 'owner',
-        'createdAt': user.createdAt.toIso8601String(),
+        'createdAt': user.createdAt?.toIso8601String(),
       };
       return await prefs.setString(_userKey, jsonEncode(userData));
     } catch (e) {
@@ -41,7 +41,9 @@ class StorageService {
         email: userData['email'],
         phone: userData['phone'],
         userType: userData['userType'] == 'client' ? UserType.client : UserType.owner,
-        createdAt: DateTime.parse(userData['createdAt']),
+        createdAt: userData['createdAt'] != null
+            ? DateTime.parse(userData['createdAt'])
+            : null,
       );
     } catch (e) {
       print('Error al obtener usuario: $e');

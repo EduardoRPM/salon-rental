@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/user.dart';
-import '../services/mock_data_service.dart';
+import '../service/mock_data_service.dart';
 import '../services/storage_service.dart';
 
 class AuthProvider with ChangeNotifier {

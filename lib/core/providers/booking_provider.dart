@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/booking.dart';
-import '../services/mock_data_service.dart';
+import '../service/mock_data_service.dart';
 
 class BookingProvider with ChangeNotifier {
   List<Booking> _bookings = [];

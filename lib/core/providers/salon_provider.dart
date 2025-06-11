@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/salon.dart';
-import '../services/mock_data_service.dart';
+import '../service/mock_data_service.dart';
 
 class SalonProvider with ChangeNotifier {
   List<Salon> _salons = [];
